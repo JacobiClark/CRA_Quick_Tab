@@ -3,6 +3,18 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
+    _id: {
+      type: String,
+    },
+    tenant: {
+      type: String,
+    },
+    client_id: {
+      type: String,
+    },
+    connection: {
+      type: String,
+    },
     email: {
       type: String,
       required: true,
@@ -10,6 +22,12 @@ const userSchema = new Schema(
       unique: true,
     },
     password: { type: String, required: true },
+    transaction: {
+      type: Object,
+    },
+    request_language: {
+      type: String,
+    },
     email_verified: { type: Boolean },
     saved_search_sites: { type: Array },
   },

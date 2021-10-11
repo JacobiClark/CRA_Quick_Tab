@@ -6,9 +6,18 @@ import {
   FaReddit,
   FaStackOverflow,
   FaTwitter,
+  FaAmazon,
 } from "react-icons/fa";
+import { SiDuckduckgo } from "react-icons/si";
 
 export const websites = [
+  {
+    websiteName: "DuckDuckGo",
+    url: "https://www.duckduckgo.com",
+    icon: (
+      <SiDuckduckgo style={{ height: "40px", width: "40px", margin: "1%" }} />
+    ),
+  },
   {
     websiteName: "Google",
     url: "https://www.google.com",
@@ -49,5 +58,10 @@ export const websites = [
     icon: (
       <FaHackerNews style={{ height: "40px", width: "40px", margin: "1%" }} />
     ),
+  },
+  {
+    websiteName: "Amazon",
+    url: "https://www.amazon.com",
+    icon: <FaAmazon style={{ height: "40px", width: "40px", margin: "1%" }} />,
   },
 ];

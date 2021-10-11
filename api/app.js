@@ -14,13 +14,19 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
 var app = express();
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
 app.use(cors());
 
 const dbURI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.uebxd.mongodb.net/QuickTab?retryWrites=true&w=majority`;
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then((result) => console.log(result))
   .catch((err) => console.log(err));
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error: "));
+db.once("open", function () {
+  console.log("Connected successfully");
+});
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -39,7 +45,6 @@ app.get("/add-user", (req, res) => {
     email_verified: false,
     saved_search_sites: ["google", "facebook"],
   });
-
   user
     .save()
     .then((result) => {
@@ -48,6 +53,33 @@ app.get("/add-user", (req, res) => {
     .catch((err) => {
       console.log(err);
     });
+});
+
+app.post("/updateSites", async (request, response) => {
+  /*var username = req.body.username;*/
+  User.updateOne(
+    { email: "jacobcs@zoho.com" },
+    { $set: { saved_search_sites: ["fo", "baz"] } },
+    function (err) {
+      console.log(err);
+      if (!err) {
+        return res.json({ status: "success", message: "username updated" });
+      }
+    }
+  );
+});
+
+app.post("/update/:id", function (req, res) {
+  /*var username = req.body.username;*/
+  User.updateOne(
+    { email: "jacobcs@zoho.com" },
+    { $set: { saved_search_sites: ["fo", "baz"] } },
+    function (err) {
+      if (!err) {
+        return res.json({ status: "success", message: "username updated" });
+      }
+    }
+  );
 });
 
 app.use("/", indexRouter);

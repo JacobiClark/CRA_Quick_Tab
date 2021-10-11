@@ -19,6 +19,7 @@ const Profile = () => {
     isAuthenticated && (
       <div>
         {api && JSON.stringify(api)}
+        <h2>{JSON.stringify(user)}</h2>
         <img src={user.picture} alt={user.name} />
         <h2>{user.name}</h2>
         <p>{user.email}</p>

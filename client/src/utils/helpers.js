@@ -27,5 +27,10 @@ export const buildSearchQuery = (websiteName, searchQuery) => {
   if (websiteName.toLowerCase() === "hacker news") {
     return "https://hn.algolia.com/?q=" + searchQuery.split(" ").join("+");
   }
-  return "https://google.com";
+  if (websiteName.toLowerCase() === "duckduckgo") {
+    return "https://duckduckgo.com/?q=" + searchQuery.split(" ").join("+");
+  }
+  if (websiteName.toLowerCase() === "amazon") {
+    return "https://www.amazon.com/s?k=" + searchQuery.split(" ").join("+");
+  }
 };
